@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { AccessToken, type AccessTokenOptions, type VideoGrant } from 'livekit-server-sdk';
 import { RoomConfiguration } from '@livekit/protocol';
 
-type ConnectionDetails = {
+export type ConnectionDetails = {
   serverUrl: string;
   roomName: string;
   participantName: string;
