@@ -1,3 +1,3 @@
 declare module '*.css' {
-    export = string;
+  export = string;
 }
