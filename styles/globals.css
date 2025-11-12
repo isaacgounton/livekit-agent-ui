@@ -4,6 +4,33 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  --fg0: #000000;
+  --fg1: #3b3b3b;
+  --fg2: #4d4d4d;
+  --fg3: #636363;
+  --fg4: #707070;
+  --fgSerious: #db1b06;
+  --fgSuccess: #006430;
+  --fgModerate: #a65006;
+  --fgAccent: #002cf2;
+
+  --bg1: #f9f9f6;
+  --bg2: #f3f3f1;
+  --bg3: #e2e2df;
+  --bgSerious: #fae6e6;
+  --bgSerious2: #ffcdc7;
+  --bgSuccess: #d1fadf;
+  --bgModerate: #faedd1;
+  --bgAccent: #b3ccff;
+  --bgAccentPrimary: #e2ebfd;
+
+  --separator1: #dbdbd8;
+  --separator2: #bdbdbb;
+  --separatorSerious: #ffcdc7;
+  --separatorSuccess: #94dcb5;
+  --separatorModerate: #fbd7a0;
+  --separatorAccent: #b3ccff;
+
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -79,6 +106,33 @@
   --font-mono:
     var(--font-commit-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
+
+  --color-fg0: var(--fg0);
+  --color-fg1: var(--fg1);
+  --color-fg2: var(--fg2);
+  --color-fg3: var(--fg3);
+  --color-fg4: var(--fg4);
+  --color-fgSerious: var(--fgSerious);
+  --color-fgSuccess: var(--fgSuccess);
+  --color-fgModerate: var(--fgModerate);
+  --color-fgAccent: var(--fgAccent);
+
+  --color-bg1: var(--bg1);
+  --color-bg2: var(--bg2);
+  --color-bg3: var(--bg3);
+  --color-bgSerious: var(--bgSerious);
+  --color-bgSerious2: var(--bgSerious2);
+  --color-bgSuccess: var(--bgSuccess);
+  --color-bgModerate: var(--bgModerate);
+  --color-bgAccent: var(--bgAccent);
+  --color-bgAccentPrimary: var(--bgAccentPrimary);
+
+  --color-separator1: var(--separator1);
+  --color-separator2: var(--separator2);
+  --color-separatorSerious: var(--separatorSerious);
+  --color-separatorSuccess: var(--separatorSuccess);
+  --color-separatorModerate: var(--separatorModerate);
+  --color-separatorAccent: var(--separatorAccent);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);

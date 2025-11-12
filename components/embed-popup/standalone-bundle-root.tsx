@@ -7,22 +7,32 @@ import EmbedFixedAgentClient from './agent-client';
 const scriptTag = document.querySelector<HTMLScriptElement>('script[data-lk-sandbox-id]');
 const sandboxIdAttribute = scriptTag?.dataset.lkSandboxId;
 
+console.log('LiveKit embed script loaded, scriptTag:', scriptTag, 'sandboxId:', sandboxIdAttribute);
+
 if (sandboxIdAttribute) {
   const wrapper = document.createElement('div');
   wrapper.setAttribute('id', 'lk-embed-wrapper');
+  // Add some debugging styles
+  wrapper.style.position = 'fixed';
+  wrapper.style.top = '0';
+  wrapper.style.left = '0';
+  wrapper.style.width = '100%';
+  wrapper.style.height = '100%';
+  wrapper.style.pointerEvents = 'none';
+  wrapper.style.zIndex = '9999';
   document.body.appendChild(wrapper);
 
-  // Use a shadow root so that any relevant css classes don't leak out and effect the broader page
-  const shadowRoot = wrapper.attachShadow({ mode: 'open' });
+  // For debugging, don't use shadow root
+  // const shadowRoot = wrapper.attachShadow({ mode: 'open' });
+  const container = wrapper;
 
-  // Include all app styles into the shadow root
-  // FIXME: this includes styles for the welcome page / etc, not just the popup embed!
+  // Include all app styles into the container
   const styleTag = document.createElement('style');
   styleTag.textContent = globalCss;
-  shadowRoot.appendChild(styleTag);
+  container.appendChild(styleTag);
 
   const reactRoot = document.createElement('div');
-  shadowRoot.appendChild(reactRoot);
+  container.appendChild(reactRoot);
 
   getAppConfig(window.location.origin, sandboxIdAttribute)
     .then((appConfig) => {

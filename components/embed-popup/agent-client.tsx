@@ -24,6 +24,8 @@ function AgentClient({ appConfig }: EmbedFixedAgentClientProps) {
   const { connectionDetails, refreshConnectionDetails, existingOrRefreshConnectionDetails } =
     useConnectionDetails(appConfig);
 
+  console.log('AgentClient rendered:', { popupOpen, connectionDetails, error });
+
   const handleTogglePopup = () => {
     if (isAnimating.current) {
       // prevent re-opening before room has disconnected

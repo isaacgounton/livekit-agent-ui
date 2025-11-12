@@ -8,12 +8,21 @@ export default function TestPage() {
   const [sandboxId, setSandboxId] = useState('');
 
   useEffect(() => {
-    setSandboxId(getSandboxId(window.location.origin));
+    const id = getSandboxId(window.location.origin);
+    console.log('Sandbox ID:', id);
+    setSandboxId(id);
+
+    // Add script tag manually
+    if (id && !document.querySelector('script[data-lk-sandbox-id]')) {
+      const script = document.createElement('script');
+      script.src = '/embed-popup.js';
+      script.setAttribute('data-lk-sandbox-id', id);
+      document.head.appendChild(script);
+    }
   }, []);
 
   return (
     <>
-      {sandboxId && <Script src="/embed-popup.js" data-lk-sandbox-id={sandboxId} />}
       <div className="min-h-screen bg-white p-8">
         <div className="mx-auto max-w-4xl">
           <h1 className="mb-4 text-4xl font-bold">LiveKit Embed Popup Test</h1>

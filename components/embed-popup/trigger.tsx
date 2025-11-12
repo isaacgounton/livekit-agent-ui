@@ -16,6 +16,8 @@ interface TriggerProps {
 export function Trigger({ error = null, popupOpen, onToggle }: TriggerProps) {
   const { state: agentState } = useVoiceAssistant();
 
+  console.log('Trigger rendered:', { error, popupOpen, agentState });
+
   const isAgentConnecting =
     popupOpen && (agentState === 'connecting' || agentState === 'initializing');
 

@@ -1,18 +1,43 @@
-const webpack = require('webpack');
-const path = require('path');
-const Dotenv = require('dotenv-webpack');
+import Dotenv from 'dotenv-webpack';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-module.exports = {
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const config = {
   mode: 'production',
   entry: './components/embed-popup/standalone-bundle-root.tsx', // Input file
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: 'embed-popup.js', // Output file
+    filename: (pathData) => {
+      return pathData.chunk.name === 'livekit'
+        ? '[name].js'
+        : pathData.chunk.name === 'vendors'
+          ? '[name].js'
+          : 'embed-popup.js';
+    },
     globalObject: 'typeof window !== "undefined" ? window : this',
   },
   devtool: 'source-map', // Equivalent to sourcemap: true
   optimization: {
-    minimize: false, // Disable minification to avoid variable name conflicts
+    minimize: true, // Enable minification now that variable conflicts are resolved
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+          priority: 10,
+        },
+        livekit: {
+          test: /[\\/]node_modules[\\/]livekit-client[\\/]/,
+          name: 'livekit',
+          chunks: 'all',
+          priority: 20,
+        },
+      },
+    },
   },
   resolve: {
     alias: { '@/*': path.resolve(__dirname, '*') },
@@ -57,3 +82,5 @@ module.exports = {
     LiveKitEmbedFixed: 'LiveKitEmbedFixed',
   },
 };
+
+export default config;

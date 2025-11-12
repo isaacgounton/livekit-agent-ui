@@ -5,17 +5,17 @@ import { MonitorIcon, MoonIcon, SunIcon } from '@phosphor-icons/react';
 import { THEME_MEDIA_QUERY, THEME_STORAGE_KEY, cn } from '@/lib/utils';
 
 const THEME_SCRIPT = `
-  const doc = document.documentElement;
+  const themeDoc = document.documentElement;
   const theme = localStorage.getItem("${THEME_STORAGE_KEY}") ?? "system";
 
   if (theme === "system") {
     if (window.matchMedia("${THEME_MEDIA_QUERY}").matches) {
-      doc.classList.add("dark");
+      themeDoc.classList.add("dark");
     } else {
-      doc.classList.add("light");
+      themeDoc.classList.add("light");
     }
   } else {
-    doc.classList.add(theme);
+    themeDoc.classList.add(theme);
   }
 `
   .trim()
@@ -25,19 +25,19 @@ const THEME_SCRIPT = `
 export type ThemeMode = 'dark' | 'light' | 'system';
 
 function applyTheme(theme: ThemeMode) {
-  const doc = document.documentElement;
+  const themeDoc = document.documentElement;
 
-  doc.classList.remove('dark', 'light');
+  themeDoc.classList.remove('dark', 'light');
   localStorage.setItem(THEME_STORAGE_KEY, theme);
 
   if (theme === 'system') {
     if (window.matchMedia(THEME_MEDIA_QUERY).matches) {
-      doc.classList.add('dark');
+      themeDoc.classList.add('dark');
     } else {
-      doc.classList.add('light');
+      themeDoc.classList.add('light');
     }
   } else {
-    doc.classList.add(theme);
+    themeDoc.classList.add(theme);
   }
 }
 
